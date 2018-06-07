@@ -18,7 +18,7 @@ esac
 
 # Configure a master session for tmux
 if [ -x "$(which tmux 2>/dev/null)" ]; then
-  tmux() { $(which 'tmux') new-session -A -s tmux "$@"; }
+  tmux() { command 'tmux' new-session -A -s tmux "$@"; }
 fi
 
 # Avoid vi in favor of vim
@@ -41,7 +41,7 @@ fi
 # Make dd report progress
 if [ -z "$bsd" ]; then
   # If we aren't on a bsd derivative
-  dd() { $(which 'dd' 2>/dev/null) status=progress "$@"; }
+  dd() { command 'dd' status=progress "$@"; }
 elif [ -x "$(which gdd 2>/dev/null)" ]; then
   # If we have gnu coreutils installed
   dd() { gdd status=progress "$@"; }
