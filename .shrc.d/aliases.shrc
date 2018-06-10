@@ -1,0 +1,49 @@
+# The basic shell doesn't include aliases
+# Instead we will define our aliases as functions
+
+# Check if we're on a bsd derivative
+# If so attempt to alias gnu coreutils
+case "$(uname)" in
+  *BSD*|*bsd*|Darwin*)
+    if [ -f "$HOME/.shrc.d/opt/aliases_gnu.shrc" ]; then
+      . $HOME/.shrc.d/opt/aliases_gnu.shrc
+    fi
+    bsd=$(uname)
+    ;;
+  *)
+    # Else do nothing
+    :
+    ;;
+esac
+
+# Configure a master session for tmux
+if [ -x "$(which tmux)" ]; then
+  tmux() { $(which 'tmux') new-session -A -s tmux "$@"; }
+fi
+
+# Avoid vi in favor of vim
+if [ -x "$(which vim)" ]; then
+  vi() { vim "$@"; }
+fi
+
+# Colorize ls
+if [ -z "$bsd" ]; then
+  # If we aren't on a bsd derivative
+  ls() { command ls --color "$@"; }
+elif [ -x "$(which gls)" ]; then
+  # If we have gnu coreutils installed
+  ls() { gls --color "$@"; }
+else
+  # Otherwise use bsd ls flags
+  ls() { command ls -G "$@"; }
+fi
+
+# Make dd report progress
+if [ -z "$bsd" ]; then
+  # If we aren't on a bsd derivative
+  dd() { $(which 'dd') status=progress "$@"; }
+elif [ -x "$(which gdd)" ]; then
+  # If we have gnu coreutils installed
+  dd() { gdd status=progress "$@"; }
+  # There is no equivalent on bsd dd
+fi
