@@ -1,6 +1,6 @@
 # Import the complete list of utilities in coreutils
 # Some of these may not exist
-# So we test before definining our alieases
+# So we test before definining our aliases
 
 [ -x "$(which gbasename)"  ] && basename()  { gbasename  "$@"; }
 [ -x "$(which gcat)"       ] && cat()       { gcat       "$@"; }
