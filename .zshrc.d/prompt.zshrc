@@ -10,7 +10,7 @@ zsh_bold_green="%B%F{green}"
 zsh_bold_blue="%B%F{cyan}"
 zsh_default="%f%b"
 
-dynamic_prompt='['${zsh_bold_green}${shell_user}'@'${shell_host}${zsh_default}' '${zsh_bold_blue}${shell_path}${zsh_default}']'$shell_separator' '
+PS1=$(echo $PS1 | sed 's&'"${shell_user}@${shell_host}"'&'"${zsh_bold_green}${shell_user}@${shell_host}${zsh_default}"'&')
+PS1=$(echo $PS1 | sed 's&'"${shell_path}"'&'"${zsh_bold_blue}${shell_path}${zsh_default}"'&')
 
-PS1=$dynamic_prompt
 # DO NOT EXPORT PS1 - It does more harm than good
