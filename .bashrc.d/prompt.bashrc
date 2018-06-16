@@ -13,7 +13,7 @@ bash_default="\[\033[00m\]"
 # Escape characters need to be escaped for sed
 bash_bold_green=$(echo $bash_bold_green | sed 's&\\&\\\\&g')
 bash_bold_blue=$(echo $bash_bold_blue | sed 's&\\&\\\\&g')
-bash_default=$(echo $bash_bold_default | sed 's&\\&\\\\&g')
+bash_default=$(echo $bash_default | sed 's&\\&\\\\&g')
 
 PS1=$(echo $PS1 | sed 's&'"${shell_user}@${shell_host}"'&'"${bash_bold_green}${shell_user}@${shell_host}${bash_default}"'&')
 PS1=$(echo $PS1 | sed 's&'"${shell_path}"'&'"${bash_bold_blue}${shell_path}${bash_default}"'&')
