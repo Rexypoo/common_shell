@@ -17,12 +17,12 @@ case "$(uname)" in
 esac
 
 # Configure a master session for tmux
-if [ -x "$(which tmux)" ]; then
+if [ -x "$(which tmux 2>/dev/null)" ]; then
   tmux() { $(which 'tmux') new-session -A -s tmux "$@"; }
 fi
 
 # Avoid vi in favor of vim
-if [ -x "$(which vim)" ]; then
+if [ -x "$(which vim 2>/dev/null)" ]; then
   vi() { vim "$@"; }
 fi
 
@@ -30,7 +30,7 @@ fi
 if [ -z "$bsd" ]; then
   # If we aren't on a bsd derivative
   ls() { command ls --color "$@"; }
-elif [ -x "$(which gls)" ]; then
+elif [ -x "$(which gls 2>/dev/null)" ]; then
   # If we have gnu coreutils installed
   ls() { gls --color "$@"; }
 else
@@ -41,8 +41,8 @@ fi
 # Make dd report progress
 if [ -z "$bsd" ]; then
   # If we aren't on a bsd derivative
-  dd() { $(which 'dd') status=progress "$@"; }
-elif [ -x "$(which gdd)" ]; then
+  dd() { $(which 'dd' 2>/dev/null) status=progress "$@"; }
+elif [ -x "$(which gdd 2>/dev/null)" ]; then
   # If we have gnu coreutils installed
   dd() { gdd status=progress "$@"; }
   # There is no equivalent on bsd dd
