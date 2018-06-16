@@ -5,6 +5,8 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'l:|=* r:|=*'
 zstyle :compinstall filename '/home/rex/.zshrc'
 
 autoload -Uz compinit
